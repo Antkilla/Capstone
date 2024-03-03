@@ -2,7 +2,7 @@ import React from 'react'
 
 const AddDealership = () => {
   return (
-    <div className="mb-4">
+    <div className="container text-center">
         <form action="">
             <div className="form-row">
                 <div className="col">
