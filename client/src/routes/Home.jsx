@@ -1,9 +1,12 @@
 import React from 'react'
+import Header from '../components/Header';
+import AddDealership from '../components/AddDealership';
 
 const Home = () => {
   return (
     <div>
-      <h1>HOME PAGE</h1>
+      <Header />
+      <AddDealership />
     </div>
   );
 };
