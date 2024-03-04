@@ -1,64 +1,70 @@
 import React, { useContext, useEffect }from 'react'
+import { Table, Button } from 'react-bootstrap';
 import DealershipFinder from '../apis/DealershipFinder';
 import { DealershipsContext } from '../context/DealershipsContext';
 
 const DealershipList = (props) => {
-    const {Dealerships, setDealerships } = useContext(DealershipsContext)
+    const { dealerships, setDealerships } = useContext(DealershipsContext);
+  
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await DealershipFinder.get("/");
-                setDealerships(response.data.data.Dealerships)
-                console.log(response);
-            }   catch (err) {}
-        };
-    
-        fetchData();
-    }, []);
-
+      const fetchData = async () => {
+        try {
+          const response = await DealershipFinder.get("/");
+          setDealerships(response.data.data.Dealerships);
+          console.log(response.data.data.Dealerships); // Log the Dealerships data
+        } catch (err) {
+          console.error(err)
+        }
+      };
+  
+      fetchData();
+    }, []); // <-- Dependency array is empty since we only want to run this once
+  
   return (
-    <div className="list-group">
-        <table className="table table-hover table-dark">
-            <thead>
-                <tr className="bg-primary">
-                    <th scope="col">Dealership</th>
-                    <th scope="col">Location</th>
-                    <th scope="col">Price Range</th>
-                    <th scope="col">Ratings</th>
-                    <th scope="col">Edit</th>
-                    <th scope="col">Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Auto Sports</td>
-                    <td>Palmdale</td>
-                    <td>$$$$</td>
-                    <td>*****</td>
-                    <td>
-                        <button className="btn btn-warning">Update</button>
-                    </td>
-                    <td>
-                        <button className="btn btn-danger">Delete</button>
-                    </td>
-                </tr>
+        <div className="list-group">
+            <Table striped bordered hover variant="dark">
+                <thead>
+                    <tr className="bg-primary">
+                        <th>Dealership</th>
+                        <th>Location</th>
+                        <th>Price Range</th>
+                        <th>Ratings</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Auto Sports</td>
+                        <td>Palmdale</td>
+                        <td>$$$$</td>
+                        <td>*****</td>
+                        <td>
+                            <Button variant="warning">Update</Button>
+                        </td>
 
-                <tr>
-                    <td>Delux Dealer</td>
-                    <td>Malibu</td>
-                    <td>$$$$$</td>
-                    <td>******</td>
-                    <td>
-                        <button className="btn btn-warning">Update</button>
-                    </td>
-                    <td>
-                        <button className="btn btn-danger">Delete</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-  );
+                        <td>
+                            <Button variant="danger">Delete</Button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Delux Dealer</td>
+                        <td>Malibu</td>
+                        <td>$$$$$</td>
+                        <td>******</td>
+                        <td>
+                            <Button variant="warning">Update</Button>
+                        </td>
+                    
+                        <td>
+                            <Button variant="danger">Delete</Button>
+                        </td>
+                    </tr>
+                </tbody>
+            </Table>
+        </div>
+    );
 };
 
-export default DealershipList
+export default DealershipList;
