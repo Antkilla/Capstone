@@ -13,10 +13,10 @@ app.use(express.json());
 
 //get all dealerships
 app.get("/api/v1/dealership", async (req, res) => {
-
+  console.log("backend api get ran");
   try {
     const results = await db.query("SELECT * FROM dealership")
-    
+    //console.log("results.rows: ", results.rows);
     res.status(200).json({
       status: "success",
       results: results.rows.length,

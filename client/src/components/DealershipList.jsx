@@ -10,8 +10,8 @@ const DealershipList = (props) => {
       const fetchData = async () => {
         try {
           const response = await DealershipFinder.get("/");
-          setDealerships(response.data.data.Dealerships);
-          console.log(response.data.data.Dealerships); // Log the Dealerships data
+          console.log(response);
+          setDealerships(response.data.data.dealerships);
         } catch (err) {
           console.error(err)
         }
@@ -34,7 +34,39 @@ const DealershipList = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    {dealerships && dealerships.map(dealership => {
+                        return (
+                            <tr key={dealership.id}>
+                                <td>{dealership.name}</td>
+                                <td>{dealership.location}</td>
+                                <td>{"$".repeat(dealership.price_range)}</td>
+                                <td>reviews</td>
+                                <td>
+                                    <Button variant="warning">Update</Button>
+                                </td>
+                                <td>
+                                    <Button variant="danger">Delete</Button>
+                                </td>
+                            </tr>
+                        );
+                    })};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    {/*<tr>
                         <td>Auto Sports</td>
                         <td>Palmdale</td>
                         <td>$$$$</td>
@@ -60,7 +92,7 @@ const DealershipList = (props) => {
                         <td>
                             <Button variant="danger">Delete</Button>
                         </td>
-                    </tr>
+                    </tr> */}
                 </tbody>
             </Table>
         </div>
