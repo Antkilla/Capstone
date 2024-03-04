@@ -13,7 +13,6 @@ app.use(express.json());
 
 //get all dealerships
 app.get("/api/v1/dealership", async (req, res) => {
-  console.log("backend api get ran");
   try {
     const results = await db.query("SELECT * FROM dealership")
     //console.log("results.rows: ", results.rows);
@@ -56,6 +55,7 @@ app.post("/api/v1/dealership", async (req, res) => {
     const results = await db.query("INSERT INTO dealership(name, location, price_range) values ($1, $2, $3) returning *", 
     [req.body.name, req.body.location, req.body.price_range])
 
+    console.log(results);
     res.status(201).json({
       status: "success",
       data: {

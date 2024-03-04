@@ -49,50 +49,7 @@ const DealershipList = (props) => {
                                 </td>
                             </tr>
                         );
-                    })};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    {/*<tr>
-                        <td>Auto Sports</td>
-                        <td>Palmdale</td>
-                        <td>$$$$</td>
-                        <td>*****</td>
-                        <td>
-                            <Button variant="warning">Update</Button>
-                        </td>
-
-                        <td>
-                            <Button variant="danger">Delete</Button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Delux Dealer</td>
-                        <td>Malibu</td>
-                        <td>$$$$$</td>
-                        <td>******</td>
-                        <td>
-                            <Button variant="warning">Update</Button>
-                        </td>
-                    
-                        <td>
-                            <Button variant="danger">Delete</Button>
-                        </td>
-                    </tr> */}
+                    })}
                 </tbody>
             </Table>
         </div>
