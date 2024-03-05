@@ -3,7 +3,7 @@ import React from 'react'
 const UpdatePage = () => {
   return (
     <div>
-        UpdatePage
+        <h1 className="text-center">Update Dealership</h1>
     </div>
   );
 };
