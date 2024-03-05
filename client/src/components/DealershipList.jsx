@@ -10,10 +10,11 @@ const DealershipList = (props) => {
       const fetchData = async () => {
         try {
           const response = await DealershipFinder.get("/");
-          console.log(response);
+          console.log("Response from API:", response.data.data.dealerships);
           setDealerships(response.data.data.dealerships);
         } catch (err) {
-          console.error(err)
+          console.error("Error fetching data:", err);
+
         }
       };
   

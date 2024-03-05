@@ -3,25 +3,26 @@ import DealershipFinder from '../apis/DealershipFinder';
 import { DealershipsContext } from '../context/DealershipsContext';
 
 const AddDealership = () => {
-    const addDealerships = useContext(DealershipsContext);
+    const { addDealerships }  = useContext(DealershipsContext);
     const [name, setName] = useState("");
     const [location, setLocation] = useState("");
     const [priceRange, setPriceRange] = useState("Price Range");
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
         try {
             const response = await DealershipFinder.post("/", {
                 name,
                 location,
                 price_range: priceRange,
             });
+            console.log("New Dealership:", response.data.data.dealership);
             addDealerships(response.data.data.dealership);
             console.log(response);
         } catch (err) {
-            
+            console.error("Error adding dealership:", err);
         }
-    }
+    };
 
     return (
         <div className="container text-center">
@@ -36,7 +37,7 @@ const AddDealership = () => {
                     <div className="col">
                         <select 
                         value={priceRange} onChange={(e) => setPriceRange(e.target.value)}
-                        className="custom-select my-6 mr-sm-2">
+                        className="custom-select my-1 mr-sm-2">
                             <option disabled>Price Range</option>
                             <option value="1">$</option>
                             <option value="2">$$</option>
