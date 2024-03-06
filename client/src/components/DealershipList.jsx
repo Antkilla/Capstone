@@ -23,7 +23,8 @@ const DealershipList = (props) => {
       fetchData();
     }, []); // <-- Dependency array is empty since we only want to run this once
 
-    const handleDelete = async (id) => {
+    const handleDelete = async (e, id) => {
+        e.stopPropagation();
         try {
             const response = await DealershipFinder.delete(`/${id}`);
             setDealerships(
@@ -36,8 +37,14 @@ const DealershipList = (props) => {
         }
     };
 
-    const handleUpdate = (id) => {
+    const handleUpdate = (e, id) => {
+        e.stopPropagation();
         Navigate(`dealership/${id}/update`);
+    }
+
+    const handleDealershipSelect = (id) => {
+        Navigate(`/dealership/${id}/`);
+
     }
   
   return (
@@ -56,16 +63,16 @@ const DealershipList = (props) => {
                 <tbody>
                     {dealerships && dealerships.map(dealership => {
                         return (
-                            <tr key={dealership.id}>
+                            <tr onClick={() => handleDealershipSelect(dealership.id)} key={dealership.id}>
                                 <td>{dealership.name}</td>
                                 <td>{dealership.location}</td>
                                 <td>{"$".repeat(dealership.price_range)}</td>
                                 <td>reviews</td>
                                 <td>
-                                    <Button onClick={() => handleUpdate(dealership.id)} className="btn btn-warning">Update</Button>
+                                    <Button onClick={(e) => handleUpdate(e, dealership.id)} className="btn btn-warning">Update</Button>
                                 </td>
                                 <td>
-                                    <Button onClick={() => handleDelete(dealership.id)} className="btn btn-danger">Delete</Button>
+                                    <Button onClick={(e) => handleDelete(e, dealership.id)} className="btn btn-danger">Delete</Button>
                                 </td>
                             </tr>
                         );
