@@ -32,7 +32,7 @@ WHERE last_name = 'Smith';
 SELECT *
 FROM users
 WHERE last_name = 'Smith' AND first_name IS NOT NULL; 
-
+------------------------------------------------------------------------------------------
 CREATE TABLE VehicleModelYear (
     id SERIAL PRIMARY KEY,
     make VARCHAR(255),
@@ -47,7 +47,7 @@ CREATE TABLE vehicle (
   price INT,
   on_sale INT
 );
-
+-----------------------------------------------------------------------------
 INSERT INTO dealership (name, location, price_range) VALUES (
 'best dealer around', 'inglewood', 3);
 
@@ -67,3 +67,11 @@ CHECK (price_range >= 1 AND price_range <= 5);
 
 ALTER TABLE dealership
 ADD CONSTRAINT id PRIMARY KEY (id);
+
+CREATE TABLE reviews (
+  id BIGSERIAL NOT NULL PRIMARY KEY,
+  dealership_id BIGINT NOT NULL REFERENCES dealership(id),
+  name VARCHAR(50) NOT NULL,
+  review TEXT NOT NULL,
+  rating INT NOT NULL check(rating >=1 and rating <=5)
+);

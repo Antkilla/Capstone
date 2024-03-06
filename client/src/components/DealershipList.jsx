@@ -44,7 +44,6 @@ const DealershipList = (props) => {
 
     const handleDealershipSelect = (id) => {
         Navigate(`/dealership/${id}/`);
-
     }
   
   return (
