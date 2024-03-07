@@ -2,6 +2,8 @@ import React, { useContext, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import { DealershipsContext } from '../context/DealershipsContext';
 import DealershipFinder from '../apis/DealershipFinder';
+import Reviews from '../components/Reviews';
+import AddReview from '../components/AddReview';
 
 const DealershipDetailPage = () => {
   const { id } = useParams();
@@ -11,8 +13,9 @@ const DealershipDetailPage = () => {
     const fetchData = async () => {
       try {
         const response = await DealershipFinder.get(`/${id}`);
+        console.log(response);
 
-        setSelectedDealership(response.data.data.dealership);
+        setSelectedDealership(response.data.data);
       } catch (err) {
         console.log(err);
       }
@@ -23,7 +26,14 @@ const DealershipDetailPage = () => {
 
   return (
     <div>
-      {selectedDealership && selectedDealership.name}
+      {selectedDealership && (
+        <>
+          <div className="mt-3">
+            <Reviews reviews={selectedDealership.reviews} />
+          </div>
+            <AddReview />
+        </>
+      )}
     </div>
   );
 };

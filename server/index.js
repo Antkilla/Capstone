@@ -15,7 +15,6 @@ app.use(express.json());
 app.get("/api/v1/dealership", async (req, res) => {
   try {
     const results = await db.query("SELECT * FROM dealership")
-    //console.log("results.rows: ", results.rows);
     res.status(200).json({
       status: "success",
       results: results.rows.length,
@@ -33,13 +32,16 @@ app.get("/api/v1/dealership/:id", async (req, res) => {
   console.log(req.params.id);
 
   try {
-    const results = await db.query("SELECT * FROM dealership WHERE id = $1", [req.params.id]);
+    const dealership = await db.query("SELECT * FROM dealership WHERE id = $1", [req.params.id]);
+
+    const reviews = await db.query("SELECT * FROM reviews WHERE dealership_id = $1", [req.params.id]);
+    console.log(reviews);
 
     res.status(200).json({
       status: "success",
-      results: results.rows.length,
       data: {
-        dealership: results.rows[0],
+        dealership: dealership.rows[0],
+        reviews: reviews.rows,
       },
     });
   } catch (err) {
