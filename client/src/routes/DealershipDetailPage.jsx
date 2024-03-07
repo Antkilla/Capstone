@@ -26,8 +26,9 @@ const DealershipDetailPage = () => {
 
   return (
     <div>
-      {selectedDealership && (
+      {selectedDealership && selectedDealership.dealership && (
         <>
+          <h1 className="text-center display-1">{selectedDealership.dealership.name}</h1>
           <div className="mt-3">
             <Reviews reviews={selectedDealership.reviews} />
           </div>

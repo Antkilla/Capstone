@@ -54,6 +54,9 @@ INSERT INTO dealership (name, location, price_range) VALUES (
 INSERT INTO dealership (name, location, price_range) VALUES (
 'auto dealer hawthorne', 'hawthorne', 2);
 
+INSERT INTO reviews (dealership_id, name, review, rating) VALUES (
+5, 'Anthony', 'THESE dealership people ARE of the DEVIL!', 1);
+
 CREATE TABLE dealership (
     id BIGSERIAL NOT NULL,
     name VARCHAR(255) NOT NULL,
