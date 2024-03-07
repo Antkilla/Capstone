@@ -1,9 +1,32 @@
 import React, { useState } from 'react';
+import DealershipFinder from '../apis/DealershipFinder';
+import { useLocation, useNavigate, useParams, } from 'react-router-dom';
 
 const AddReview = () => {
+    const { id } = useParams();
+    const location = useLocation();
+    const navigate = useNavigate();
+    console.log(location);
+    console.log(id);
+
     const [name, setName] = useState("");
     const [reviewText, setReviewText] = useState("");
     const [rating, setRating] = useState("Rating");
+
+    const handleSubmitReview = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await DealershipFinder.post(`/${id}/addReview`, {
+                name,
+                review: reviewText,
+                rating,
+            });
+            window.location.reload(); // Reload the current page
+            navigate(location.pathname);
+        }   catch(err) {
+
+        };
+    };
 
     return (
         <div className="mb-2">
@@ -29,7 +52,7 @@ const AddReview = () => {
                     <label htmlFor="Review">Review</label>
                     <textarea value={reviewText} onChange={(e) => setReviewText(e.target.value)} id="Review" className="form-control"></textarea>
                 </div>
-                <button className="btn btn-primary">Submit</button>
+                <button type="submit" onClick={handleSubmitReview} className="btn btn-primary">Submit</button>
             </form>
         </div>
     );
